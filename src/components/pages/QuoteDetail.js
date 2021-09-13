@@ -9,9 +9,6 @@ export default function QuoteDetail() {
     <>
       <h1>Quote Detail Page</h1>
       <p>{params.quoteID}</p>
-      <Route path="/quotes/:quoteID/comments">
-        <Comments />
-      </Route>
       <Route path={`/quotes/${params.quoteID}/comments`}>
         <Comments />
       </Route>
