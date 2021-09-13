@@ -16,9 +16,9 @@ export default function QuoteDetail() {
   const quote = DUMMY_QUOTES.find((quoteObj) => {
     return quoteObj.id === params.quoteID;
   });
-  // if (!quote) {
-  //   return <p>No quote found!</p>;
-  // }
+  if (!quote) {
+    return <p>No quote found!</p>;
+  }
   return (
     <>
       <HighlightedQuote author={quote.author} text={quote.text} />
