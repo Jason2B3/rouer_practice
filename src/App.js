@@ -3,30 +3,30 @@ import AllQuotes from "./components/pages/AllQuotes";
 import NewQuote from "./components/pages/NewQuote";
 import QuoteDetail from "./components/pages/QuoteDetail";
 import Layout from "./components/layout/Layout";
-
+import BBB from "./context";
 function App() {
   return (
     <Layout>
-      <Switch>
-        <Route path="/" exact>
-          <Redirect to="/quotes" />
-        </Route>
-        <Route path="/quotes" exact>
-          <AllQuotes />
-        </Route>
-        <Route path="/quotes/:quoteID">
-          <QuoteDetail />
-        </Route>
-        <Route path="/new-quote">
-          <NewQuote />
-        </Route>
-      </Switch>
+      <BBB>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to="/quotes" />
+          </Route>
+          <Route path="/quotes" exact>
+            <AllQuotes />
+          </Route>
+          <Route path="/quotes/:quoteID">
+            <QuoteDetail />
+          </Route>
+          <Route path="/new-quote">
+            <NewQuote />
+          </Route>
+        </Switch>
+      </BBB>
     </Layout>
   );
 }
 
 export default App;
-/*
-/quotes/:quoteID  should not cut it
-/quotes/:quoteID/comments
-*/
+
+// const { DUMMY_QUOTES } = useCustomHook();

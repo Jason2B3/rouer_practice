@@ -1,5 +1,9 @@
 import React from "react";
+import QuoteList from "../quotes/QuoteList";
+import { useCustomHook } from "../../context";
+// will eventually fetch quotes from a server
 
 export default function AllQuotes() {
-  return <h1>All Quotes Page</h1>;
+  const { DUMMY_QUOTES } = useCustomHook();
+  return <QuoteList quotes={DUMMY_QUOTES} />;
 }

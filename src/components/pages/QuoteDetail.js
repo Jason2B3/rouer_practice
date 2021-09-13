@@ -1,14 +1,27 @@
 import React from "react";
 import { Route, useParams } from "react-router";
 import Comments from "../comments/Comments";
+import { useCustomHook } from "../../context";
+import HighlightedQuote from "../quotes/HighlightedQuote";
 
 export default function QuoteDetail() {
-  const params = useParams();
-  console.log(params.quoteID);
+  const { DUMMY_QUOTES } = useCustomHook(); // list of dummy quotes fr/ context file
+  const params = useParams(); // :quoteID from App.js
+
+  // Find the quote in our list that matches the params.quoteID to display itsinfo
+  /*const DUMMY_QUOTES_IN_CONTEXT.JS = [
+    { id: "q1", author: "max", text: "Learning React is fun!" },
+    { id: "q2", author: "Maximilian", text: "Learning React is great!" },
+  ]; */
+  const quote = DUMMY_QUOTES.find((quoteObj) => {
+    return quoteObj.id === params.quoteID;
+  });
+  if (!quote) {
+    return <p>No quote found!</p>;
+  }
   return (
     <>
-      <h1>Quote Detail Page</h1>
-      <p>{params.quoteID}</p>
+      <HighlightedQuote author={quote.author} text={quote.text} />
       <Route path={`/quotes/${params.quoteID}/comments`}>
         <Comments />
       </Route>
