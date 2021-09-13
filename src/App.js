@@ -2,6 +2,8 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import AllQuotes from "./components/pages/AllQuotes";
 import NewQuote from "./components/pages/NewQuote";
 import QuoteDetail from "./components/pages/QuoteDetail";
+// import 
+
 function App() {
   return (
     <Switch>
@@ -11,7 +13,7 @@ function App() {
       <Route path="/quotes" exact>
         <AllQuotes />
       </Route>
-      <Route path="/quotes/:quoteId">
+      <Route path="/quotes/:quoteID">
         <QuoteDetail />
       </Route>
       <Route path="/new-quote">
@@ -22,3 +24,7 @@ function App() {
 }
 
 export default App;
+/*
+/quotes/:quoteID  should not cut it
+/quotes/:quoteID/comments
+*/
