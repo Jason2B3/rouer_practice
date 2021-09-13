@@ -1,5 +1,7 @@
 import React from "react";
-import { Route, useParams } from "react-router";
+import { useParams } from "react-router";
+import { Route, Switch, Redirect, Link } from "react-router-dom";
+
 import Comments from "../comments/Comments";
 import { useCustomHook } from "../../context";
 import HighlightedQuote from "../quotes/HighlightedQuote";
@@ -17,7 +19,8 @@ export default function QuoteDetail() {
     return quoteObj.id === params.quoteID;
   });
   if (!quote) {
-    return <p>No quote found!</p>;
+    console.log("routing elsewhere");
+    return <Redirect to="/quotes" />;
   }
   return (
     <>
