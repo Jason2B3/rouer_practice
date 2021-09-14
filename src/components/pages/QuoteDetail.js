@@ -18,10 +18,10 @@ export default function QuoteDetail() {
   const quote = DUMMY_QUOTES.find((quoteObj) => {
     return quoteObj.id === params.quoteID;
   });
-  // if (!quote) {
-  //   console.log("routing elsewhere");
-  //   return <Redirect to="/quotes" />;
-  // }
+  if (!quote) {
+    console.log("routing elsewhere");
+    return <Redirect to="/quotes" />;
+  }
   return (
     <>
       <HighlightedQuote author={quote.author} text={quote.text} />
