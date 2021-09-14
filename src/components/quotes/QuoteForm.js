@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useHistory } from "react-router-dom";
 
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
@@ -8,16 +9,17 @@ const QuoteForm = (props) => {
   const authorInputRef = useRef();
   const textInputRef = useRef();
 
-  function submitFormHandler(event) {
-    event.preventDefault();
 
+  function submitFormHandler(event) {
+    // Could validate here, but I choose not to
+    event.preventDefault();
     const enteredAuthor = authorInputRef.current.value;
     const enteredText = textInputRef.current.value;
-    // optional: Could validate here
-    
+
     // Drilling upwards:
     // onAddQuote is a function from NewQuote.js that accepts the following obj of data
     props.onAddQuote({ author: enteredAuthor, text: enteredText });
+    
   }
 
   return (
