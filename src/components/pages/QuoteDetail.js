@@ -19,8 +19,7 @@ export default function QuoteDetail() {
     return quoteObj.id === params.quoteID;
   });
   if (!quote) {
-    console.log("routing elsewhere");
-    return <Redirect to="/quotes" />;
+    return <p>No quote found!</p>;
   }
   return (
     <>
