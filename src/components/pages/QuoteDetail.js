@@ -9,26 +9,31 @@ import HighlightedQuote from "../quotes/HighlightedQuote";
 export default function QuoteDetail() {
   const { DUMMY_QUOTES } = useCustomHook(); // list of dummy quotes fr/ context file
   const params = useParams(); // :quoteID from App.js (should be q1 or q2)
-  console.log(params);
+  const regParameter = params.quoteID;
 
   // Find the quote in our list that matches the params.quoteID to display its info
   const quote = DUMMY_QUOTES.find((quoteObj) => {
-    return quoteObj.id === params.quoteID;
+    return quoteObj.id === regParameter;
   });
   if (!quote) return <p>No quote found!</p>;
 
-  const pathToCommentsPage = `/quotes/${params.quoteID}/comments`;
+  const pathToQuotesIDPage = `/quotes/${regParameter}`;
+  const pathToCommentsPage = `/quotes/${regParameter}/comments`;
   return (
     <>
       <HighlightedQuote author={quote.author} text={quote.text} />
-      <Route path={pathToCommentsPage}>
+      {/* We're already inside the next route that follows */}
+      <Route path={pathToQuotesIDPage} exact>
+        <div className="centered">
+          <Link to={pathToCommentsPage} className="btn--flat">
+            Load Comments
+          </Link>
+        </div>
+      </Route>
+      {/* This route's taken if we press the "load comments" button */}
+      <Route path={pathToCommentsPage} exact>
         <Comments />
       </Route>
-      <div className="centered">
-        <Link to={pathToCommentsPage} className="btn--flat">
-          Load Comments
-        </Link>
-      </div>
     </>
   );
 }
