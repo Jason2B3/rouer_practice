@@ -7,7 +7,6 @@ import NotFound from "./components/pages/NotFound";
 import Layout from "./components/layout/Layout";
 import BBB from "./context";
 function App() {
-  
   return (
     <Layout>
       <BBB>
