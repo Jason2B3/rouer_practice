@@ -14,27 +14,32 @@ const QuoteList = (props) => {
   // ----------------[ GRAB REQUIRED DATA ]------------------------
   const history = useHistory(); // history object
   const location = useLocation(); // location object
-  const longQueryParamString = location.search; // queryParameter string
-  // ----------------[ PREPARATION OVER ]------------------------
-  //% STEP 2.2
-  // Sort the quotes with our helper function according to sortOrder's Boolean
-  // When true, sort ascending. When false, sort descending
-  const [sortOrder, setSortOrder] = useState(true);
+
+  //% Break down the current URL's query parameters
+  let queryParameters = new URLSearchParams(location.search);
+  const qpValue = queryParameters.get("sort"); // equals undefined, asc, or desc
+
+  //% Sort the quotes based on the query parameter of the searched URL
+  let stateVari;
+  if (qpValue === "desc") stateVari = false;
+  if (qpValue === "asc") stateVari = true;
+  if (!qpValue) stateVari = true; // if QP's undefined → sort ascending by default
+  const [sortOrder, setSortOrder] = useState(stateVari);
   const sortedQuotes = sortQuotes(props.quotes, sortOrder);
 
-  //% STEP 2.1: Switch query parameter between ?sort=asc or ?sort=desc
+  //% Switch query parameter between ?sort=asc or ?sort=desc when we hit the button
   const changeSortingHandler = () => {
     const flippedSortOrder = sortOrder ? "desc" : "asc";
     history.push(`/quotes?sort=${flippedSortOrder}`);
-    setSortOrder((state) => !state); // flip the sortOrder vakue for real now
+    setSortOrder((state) => !state); // flip the sortOrder value for real now
   };
   return (
     <Fragment>
       <div>
         <button onClick={changeSortingHandler}>
-          Sort {sortOrder ? "Descending" : "Ascending"}
+          Sort {sortOrder ? "descending" : "ascending"}
         </button>
-        <p>Currently sorted {sortOrder ? "Ascending" : "Descending"}</p>
+        <p>Currently sorted {sortOrder ? "ascending" : "descending"}</p>
       </div>
       <ul className={classes.list}>
         {sortedQuotes.map((quote) => (
@@ -51,3 +56,6 @@ const QuoteList = (props) => {
 };
 
 export default QuoteList;
+// http://localhost:3000/quotes       (ascending)
+// http://localhost:3000/quotes?sort=desc (descending)
+// http://localhost:3000/quotes?sort=asc  (ascending)
