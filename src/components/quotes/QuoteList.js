@@ -30,7 +30,11 @@ const QuoteList = (props) => {
   //% Switch query parameter between ?sort=asc or ?sort=desc when we hit the button
   const changeSortingHandler = () => {
     const flippedSortOrder = sortOrder ? "desc" : "asc";
-    history.push(`/quotes?sort=${flippedSortOrder}`);
+    history.push({
+      pathname: window.location.pathname,
+      search: `?sort=${flippedSortOrder}`,
+    });
+
     setSortOrder((state) => !state); // flip the sortOrder value for real now
   };
   return (

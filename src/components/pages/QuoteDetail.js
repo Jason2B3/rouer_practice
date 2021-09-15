@@ -1,12 +1,16 @@
 import React from "react";
 import { useParams } from "react-router";
-import { Route, Switch, Redirect, Link } from "react-router-dom";
-
+import { Route, useRouteMatch, useLocation, Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useCustomHook } from "../../context";
 import HighlightedQuote from "../quotes/HighlightedQuote";
 
 export default function QuoteDetail() {
+  const match = useRouteMatch();
+  console.log(match.path, "->", match.url);
+  // Ex. {path: '/quotes/:quoteID', url: '/quotes/q1',
+  // isExact: true, params: {quoteID: 'q1'}}
+
   const { DUMMY_QUOTES } = useCustomHook(); // list of dummy quotes fr/ context file
   const params = useParams(); // :quoteID from App.js (should be q1 or q2)
   const regParameter = params.quoteID;
@@ -17,8 +21,8 @@ export default function QuoteDetail() {
   });
   if (!quote) return <p>No quote found!</p>;
 
-  const pathToQuotesIDPage = `/quotes/${regParameter}`;
-  const pathToCommentsPage = `/quotes/${regParameter}/comments`;
+  const pathToQuotesIDPage = match.url;
+  const pathToCommentsPage = `${match.url}/comments`;
   return (
     <>
       <HighlightedQuote author={quote.author} text={quote.text} />
