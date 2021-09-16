@@ -6,9 +6,7 @@ const QuoteItem = (props) => {
     <li className={classes.item}>
       <figure>
         <blockquote>
-          <p>
-            {props.text} (ID:{props.id})
-          </p>
+          <p>{props.text}</p>
         </blockquote>
         <figcaption>{props.author}</figcaption>
       </figure>
