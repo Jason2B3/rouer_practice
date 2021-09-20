@@ -14,17 +14,17 @@ export default function QuoteDetail() {
   const {
     sendRequest,
     status,
-    data: loadedQuote,
+    data: loadedQuote, // renaming the data returned from useHttp
     error,
   } = useHttp(getSingleQuote, true);
 
   // Get :quoteID that brought us to this page (route parameter value from App.js)
   const params = useParams();
   const quoteID = params.quoteID;
-
+  //% Grabs a quote from Firebase everytime quoteID changes (or sendRequest)
   useEffect(() => {
-    sendRequest(quoteID);
-  }, [sendRequest, quoteID]);
+    sendRequest(quoteID); // async function should be inside useEffect
+  }, [sendRequest, quoteID]); 
 
   //# Conditional Return JSX Area -----------------------------
   //# ORDER: pending → error → found nothing → success JSX
