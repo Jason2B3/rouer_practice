@@ -20,13 +20,14 @@ export default function QuoteDetail() {
 
   // Get :quoteID that brought us to this page (route parameter value from App.js)
   const params = useParams();
-  const quoteID= params.quoteID
+  const quoteID = params.quoteID;
 
   useEffect(() => {
     sendRequest(quoteID);
   }, [sendRequest, quoteID]);
 
   //# Conditional Return JSX Area -----------------------------
+  //# ORDER: pending → error → found nothing → success JSX
   if (status === "pending") {
     return (
       <div className="centered">
@@ -38,7 +39,6 @@ export default function QuoteDetail() {
     return <p className="centered">{error}</p>;
   }
   if (!loadedQuote.text) return <p>No quote found!</p>;
-
   const pathToQuotesIDPage = match.url;
   const pathToCommentsPage = `${match.url}/comments`;
   return (
@@ -54,7 +54,7 @@ export default function QuoteDetail() {
       </Route>
       {/* This route's taken if we press the "load comments" button */}
       <Route path={pathToCommentsPage} exact>
-        <Comments />
+        <Comments quoteID={quoteID} />
       </Route>
     </>
   );
