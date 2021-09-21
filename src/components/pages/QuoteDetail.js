@@ -8,7 +8,6 @@ import { getSingleQuote } from "../../lib/api";
 import { useEffect } from "react/cjs/react.development";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import useHttp from "../../hooks/use-http";
-
 export default function QuoteDetail() {
   const match = useRouteMatch();
   const {
@@ -31,7 +30,7 @@ export default function QuoteDetail() {
   if (status === "pending") {
     return (
       <div className="centered">
-        <LoadingSpinner />
+        PLACEHOLDER FOR LOADING SPINNER
       </div>
     );
   }
